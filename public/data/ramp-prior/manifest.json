@@ -1,0 +1,87 @@
+{
+  "title": "Ramp / external-view-conditioned virtual motion",
+  "radiusUnits": 1,
+  "halfWidth": 0.34,
+  "overhangLength": 1.65,
+  "bodyHeight": 0.06,
+  "cameraOffset": [
+    0,
+    -0.025,
+    0
+  ],
+  "takeoffTime": 6.85,
+  "landingTime": 9.5,
+  "frames": 62,
+  "sampleFps": 5,
+  "sourceSegment": [
+    13.9,
+    26.233333333
+  ],
+  "observationCount": 23,
+  "fit": 15.01215078251058,
+  "contactFit": 2.8089859351294546,
+  "hybridPointCount": 125404,
+  "hybridDepthScale": 0.8363504023475348,
+  "hybridSupportFrames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33
+  ],
+  "hybridTimeRange": [
+    0,
+    6.8
+  ],
+  "sources": [
+    {
+      "title": "Flight POV | Roadster (Tesla)",
+      "url": "https://www.youtube.com/watch?v=3NyyOZQzy_E",
+      "use": "Top-right external panel: manual 2D position annotations; left panel: DA3 input"
+    },
+    {
+      "title": "The Ramp | Roadster (Tesla)",
+      "url": "https://www.youtube.com/watch?v=7p5LxFdc-Qg",
+      "use": "Separately reviewed multiple external angles; supports ramp/overhang/flight/landing topology only, not metric dimensions or synchronization"
+    }
+  ],
+  "assumptions": [
+    "Circular ramp radius=1 and flat upper overhang length=1.65; not engineering measurements.",
+    "All motion is constrained to the centre vertical plane; cross-track depth is not observed.",
+    "Planar homography uses four manually traced/assumed correspondences, not calibrated camera intrinsics.",
+    "Body heading follows road tangent during contact; airborne half-roll timing is a smooth assumed schedule, not measured attitude.",
+    "Camera rigid transform is assumed; all distances remain radius-normalized.",
+    "Edited panels are compared at the same video time; sensor synchronization not established.",
+    "After 11 seconds the vehicle leaves the external image; final motion is extrapolated.",
+    "Optional DA3 points keep predicted depth and one prior-fitted scale, only during 0\u20136.8 s contact. They do not validate the virtual track."
+  ]
+}

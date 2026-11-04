@@ -93,3 +93,17 @@ python scripts/test_central_view.py --source /path/to/03_ramp.mp4 --runtime /pat
 ```
 
 The runtime directory must contain installed `da3` and the official local `da3-large` checkpoint. Use `--preview-only` to inspect preprocessing without inference.
+
+## External-view-conditioned virtual motion
+
+Open `prior.html` for a separate hypothesis viewer. This is a kinematic model conditioned on manual image observations, **not a measured reconstruction or ground-truth trajectory**. Existing learned-method comparisons remain available on the main page.
+
+The original Flight POV top-right external panel supplies 23 approximate manually annotated car centres. Four manually traced/assumed plane correspondences define a homography. A radius-normalized semicircular road with an upper overhang constrains contact motion; monotonic progress is interpolated with PCHIP. Airborne positions use the assumed vertical plane and smooth interpolation, not ballistic dynamics. Airborne roll, camera mounting transform, road dimensions and cross-track position are assumptions. Edited-panel timing is not calibrated synchronization. Motion after 11 s is extrapolated. Tesla's separate The Ramp video was reviewed for topology, not metric calibration.
+
+The in-sample 2D fitting RMSE is 15.0 px overall and 2.8 px during initial ramp/overhang contact (606 x 360 external panel). These are fitting residuals, not independent pose accuracy; the simplified planar/ground assumptions do not match all observations. No measured metric scale or full 6DoF recovery is claimed.
+
+The optional 125,404-point diagnostic preserves DA3's predicted depth with one global scale fitted against the assumed road, then places points using prior camera poses. Only contact frames at 0–6.8 s are used. Remaining disagreement and overlapping surfaces are visible. The synthetic road and this depth cloud have separate PLY downloads; neither independently validates the prior.
+
+Reproduce from the repository root using `scripts/build_motion_prior.py` (NumPy, SciPy, OpenCV). It reads the existing `runtime/central-view/crop/predictions.npz` and the original downloaded Flight POV video from the local Downloads path configured in the script. Raw model predictions and source videos are not committed. The manual annotations, homography, explicit assumptions, all 62 poses and external panel frames are exported under `public/data/ramp-prior/`.
+
+Validation: `npm run build`; `node scripts/verify-prior.mjs [site-base-url]` checks all 62 image pairs, finite orthonormal poses, downloads, animation, toggles, desktop/mobile layout and browser errors. This verifies implementation, not reconstruction accuracy.

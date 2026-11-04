@@ -1,0 +1,233 @@
+{
+  "method": "Manual approximate body-centre annotations from contact sheets; not an automatic tracker",
+  "imageSize": [
+    606,
+    360
+  ],
+  "pixelUncertaintyApprox": 5,
+  "observations": [
+    {
+      "time": 0.0,
+      "pixel": [
+        464.0,
+        205.0
+      ]
+    },
+    {
+      "time": 0.5,
+      "pixel": [
+        464.0,
+        205.0
+      ]
+    },
+    {
+      "time": 1.0,
+      "pixel": [
+        471.0,
+        205.0
+      ]
+    },
+    {
+      "time": 1.5,
+      "pixel": [
+        485.0,
+        198.0
+      ]
+    },
+    {
+      "time": 2.0,
+      "pixel": [
+        506.0,
+        184.0
+      ]
+    },
+    {
+      "time": 2.5,
+      "pixel": [
+        530.0,
+        164.0
+      ]
+    },
+    {
+      "time": 3.0,
+      "pixel": [
+        545.0,
+        135.0
+      ]
+    },
+    {
+      "time": 3.5,
+      "pixel": [
+        555.0,
+        109.0
+      ]
+    },
+    {
+      "time": 4.0,
+      "pixel": [
+        555.0,
+        88.0
+      ]
+    },
+    {
+      "time": 4.5,
+      "pixel": [
+        550.0,
+        65.0
+      ]
+    },
+    {
+      "time": 5.0,
+      "pixel": [
+        541.0,
+        51.0
+      ]
+    },
+    {
+      "time": 5.5,
+      "pixel": [
+        528.0,
+        39.0
+      ]
+    },
+    {
+      "time": 6.0,
+      "pixel": [
+        495.0,
+        39.0
+      ]
+    },
+    {
+      "time": 6.5,
+      "pixel": [
+        452.0,
+        38.0
+      ]
+    },
+    {
+      "time": 7.0,
+      "pixel": [
+        408.0,
+        39.0
+      ]
+    },
+    {
+      "time": 7.5,
+      "pixel": [
+        357.0,
+        63.0
+      ]
+    },
+    {
+      "time": 8.0,
+      "pixel": [
+        302.0,
+        105.0
+      ]
+    },
+    {
+      "time": 8.5,
+      "pixel": [
+        249.0,
+        174.0
+      ]
+    },
+    {
+      "time": 9.0,
+      "pixel": [
+        202.0,
+        236.0
+      ]
+    },
+    {
+      "time": 9.5,
+      "pixel": [
+        153.0,
+        262.0
+      ]
+    },
+    {
+      "time": 10.0,
+      "pixel": [
+        106.0,
+        278.0
+      ]
+    },
+    {
+      "time": 10.5,
+      "pixel": [
+        57.0,
+        304.0
+      ]
+    },
+    {
+      "time": 11.0,
+      "pixel": [
+        10.0,
+        318.0
+      ]
+    }
+  ],
+  "trackControlPoints": [
+    {
+      "planeZH": [
+        0.0,
+        0.0
+      ],
+      "image": [
+        470.0,
+        210.0
+      ]
+    },
+    {
+      "planeZH": [
+        0.0,
+        2.0
+      ],
+      "image": [
+        525.0,
+        36.0
+      ]
+    },
+    {
+      "planeZH": [
+        1.0,
+        1.0
+      ],
+      "image": [
+        560.0,
+        110.0
+      ]
+    },
+    {
+      "planeZH": [
+        -1.649999976158142,
+        2.0
+      ],
+      "image": [
+        420.0,
+        33.0
+      ]
+    }
+  ],
+  "homography": [
+    [
+      114.40045432034627,
+      89.02420371534923,
+      470.0
+    ],
+    [
+      5.061041002244809,
+      -82.78119745951889,
+      210.0
+    ],
+    [
+      0.08535507274879107,
+      0.117188959457808,
+      1.0
+    ]
+  ],
+  "reprojectionRMSE": 15.01215078251058,
+  "contactRMSE": 2.8089859351294546,
+  "note": "Fitting residual against the same annotations, NOT independent pose accuracy. Plane dimensions and shape are assumed. Edited-panel timing is not verified sensor synchronization."
+}
