@@ -1,5 +1,7 @@
 import { chromium } from '@playwright/test';
 import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const experiments=JSON.parse(await readFile('src/experiments.json','utf8'));
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:1});
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -27,14 +29,25 @@ await page.setViewportSize({width:390,height:844});
 await page.waitForTimeout(300);
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
 await page.screenshot({path:'runtime/viewer-mobile.png',fullPage:true});
-for(const clip of ['ramp','kickflip']){
-  await page.locator('#clip').selectOption(clip);
-  await page.waitForFunction(c=>window.__reconstruction?.ready&&window.__reconstruction.clip===c,clip,{timeout:60000});
-  const expected=clip==='kickflip'?46:62;
+for(const experiment of experiments.filter(e=>e.status==='ready')){
+  await page.locator('#clip').selectOption(experiment.id);
+  await page.waitForFunction(id=>window.__reconstruction?.ready&&window.__reconstruction.run===id,experiment.id,{timeout:60000});
+  const manifest=JSON.parse(await readFile('public/data/'+experiment.path+'manifest.json','utf8'));
+  const expected=manifest.frames;
   assert.equal(await page.evaluate(()=>window.__reconstruction.frameCount),expected);
+  assert.equal(await page.evaluate(()=>window.__reconstruction.pointCount),manifest.pointCount);
   const url=await page.locator('#download-poses').getAttribute('href');
   const response=await page.request.get(new URL(url,page.url()).href);
   assert(response.ok());assert.equal((await response.json()).frames.length,expected);
+  const cloudUrl=await page.locator('#download-cloud').getAttribute('href');
+  assert((await page.request.head(new URL(cloudUrl,page.url()).href)).ok());
+  const last=Math.max(0,expected-1);
+  await page.locator('#scrub').fill(String(last));await page.locator('#scrub').dispatchEvent('input');
+  await page.waitForFunction(()=>document.querySelector('#frame').complete&&document.querySelector('#frame').naturalWidth>0);
+  await page.locator('#mode').selectOption('frame');await page.locator('#mode').selectOption('all');
+  await page.setViewportSize({width:1440,height:1100});
+  await page.waitForTimeout(150);
+  await page.screenshot({path:'runtime/viewer-'+experiment.id+'.png',fullPage:true});
 }
 assert.deepEqual(errors,[]);
 console.log(JSON.stringify({base,...stats,errors,interactionChecks:'passed',mobileOverflow:false}));

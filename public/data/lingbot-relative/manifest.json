@@ -1,0 +1,53 @@
+{
+  "title": "Roadster / Kickflip",
+  "model": "LingBot-Map",
+  "modelRepo": "https://github.com/Robbyant/lingbot-map",
+  "upstreamCommit": "b9dd1b1de535e6d36e777fb42b8433c781bfd783",
+  "sourceUrl": "https://www.youtube.com/watch?v=3NyyOZQzy_E",
+  "sourceSegment": [
+    4.833333333,
+    13.899999999666665
+  ],
+  "sourceSha256": "20869a67b60b4cd1ce17b8ad2b5a910eb14004184b51ef51bc5025d555baa5f8",
+  "duration": 9.066666666666666,
+  "frames": 46,
+  "width": 518,
+  "height": 420,
+  "pointCount": 188587,
+  "sampleFps": 5.0,
+  "inferenceSeconds": 7.157684564590454,
+  "peakGpuGB": 10.027201024,
+  "settings": {
+    "imageSize": 518,
+    "scaleFrames": 2,
+    "keyframeInterval": 2,
+    "cacheWindow": 16,
+    "backend": "SDPA",
+    "dtype": "bfloat16",
+    "exportRevision": "relative-confidence-common-v1"
+  },
+  "bounds": [
+    [
+      -0.20861129462718964,
+      -0.4033423364162445,
+      0.38282519578933716
+    ],
+    [
+      0.24619156122207642,
+      0.10951396077871323,
+      1.620710849761963
+    ]
+  ],
+  "diagnostics": {
+    "pathLength": 4.76801872253418,
+    "maxStep": 0.9082165360450745,
+    "medianStep": 0.05893549695611,
+    "emptyFrames": 0
+  },
+  "limitations": [
+    "Uncalibrated fisheye video, smoke, reflections and fast rotations.",
+    "Relative camera pose, not metric robot pose. No ground truth.",
+    "Point count is a display statistic, not accuracy; sequences have independent coordinates."
+  ],
+  "displayFilter": "Per-frame top 40% confidence among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff."
+}

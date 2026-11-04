@@ -1,5 +1,5 @@
 """Check export integrity and transform conventions (not ground-truth accuracy)."""
-import json, sys
+import json, sys, gzip
 from pathlib import Path
 import numpy as np
 p=Path(sys.argv[1] if len(sys.argv)>1 else 'public/data')
@@ -7,7 +7,7 @@ m=json.loads((p/'manifest.json').read_text())
 t=json.loads((p/'trajectory.json').read_text())
 xyz=np.fromfile(p/'positions.bin',dtype='<f4').reshape(-1,3)
 ids=np.fromfile(p/'frame-ids.bin',dtype='<u2')
-rgb=np.fromfile(p/'colors.bin',dtype='u1').reshape(-1,3)
+rgb=np.frombuffer(gzip.decompress((p/'colors.bin.gz').read_bytes()),dtype='u1').reshape(-1,3) if (p/'colors.bin.gz').exists() else np.fromfile(p/'colors.bin',dtype='u1').reshape(-1,3)
 assert len(xyz)==len(ids)==len(rgb)==m['pointCount']
 assert len(t['frames'])==m['frames']
 assert np.isfinite(xyz).all()

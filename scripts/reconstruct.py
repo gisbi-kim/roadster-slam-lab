@@ -91,7 +91,7 @@ points=np.concatenate(points).astype('<f4'); colors=np.concatenate(colors)
 frame_ids=np.concatenate(frame_ids).astype('<u2'); scores=np.concatenate(scores).astype('<f4')
 if not len(points) or not np.isfinite(points).all() or not np.isfinite(poses).all():
     raise RuntimeError('Invalid reconstruction')
-points.tofile(out/'positions.bin'); colors.tofile(out/'colors.bin'); frame_ids.tofile(out/'frame-ids.bin')
+points.tofile(out/'positions.bin'); (out/'colors.bin.gz').write_bytes(__import__('gzip').compress(colors.tobytes(),mtime=0)); frame_ids.tofile(out/'frame-ids.bin')
 scores.tofile(out/'confidence.bin')
 ply_dtype=np.dtype([('x','<f4'),('y','<f4'),('z','<f4'),('red','u1'),('green','u1'),('blue','u1')])
 verts=np.empty(len(points),ply_dtype)

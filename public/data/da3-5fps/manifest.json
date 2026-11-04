@@ -1,0 +1,50 @@
+{
+  "title": "Roadster / Kickflip",
+  "model": "Depth Anything 3 Large",
+  "modelRepo": "https://github.com/ByteDance-Seed/Depth-Anything-3",
+  "upstreamCommit": "3d835ec1a5802d64a8b8b15f817a1ab54809bfe4",
+  "sourceUrl": "https://www.youtube.com/watch?v=3NyyOZQzy_E",
+  "sourceSegment": [
+    4.833333333,
+    13.9
+  ],
+  "sourceSha256": "20869a67b60b4cd1ce17b8ad2b5a910eb14004184b51ef51bc5025d555baa5f8",
+  "duration": 9.066666666666666,
+  "sampleFps": 5.0,
+  "inferenceSeconds": 4.427751541137695,
+  "peakGpuGB": 8.7599232,
+  "settings": {
+    "checkpoint": "depth-anything/DA3-LARGE",
+    "resolution": 504,
+    "useRayPose": false,
+    "mode": "joint multi-view inference"
+  },
+  "frames": 46,
+  "width": 504,
+  "height": 420,
+  "pointCount": 362321,
+  "bounds": [
+    [
+      -0.4757552742958069,
+      -0.853858232498169,
+      -0.14572112262248993
+    ],
+    [
+      0.1891324818134308,
+      0.24038343131542206,
+      1.6796996593475342
+    ]
+  ],
+  "diagnostics": {
+    "pathLength": 4.19913940018667,
+    "maxStep": 0.4391911243079983,
+    "medianStep": 0.06309205312238111,
+    "emptyFrames": 0
+  },
+  "displayFilter": "Per-frame top 40% confidence among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.",
+  "limitations": [
+    "Uncalibrated fisheye video, smoke, reflections and fast rotations.",
+    "Relative camera pose, not metric robot pose. No ground truth.",
+    "Point count is a display statistic, not accuracy; sequences have independent coordinates."
+  ]
+}

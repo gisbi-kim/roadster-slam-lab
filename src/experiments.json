@@ -1,0 +1,9 @@
+[
+ {"id":"da3-5fps","label":"DA3 Large · 킥플립 · 5 FPS","path":"da3-5fps/","clip":"kickflip","status":"ready"},
+ {"id":"da3-15fps","label":"DA3 Large · 킥플립 · 15 FPS","path":"da3-15fps/","clip":"kickflip","status":"ready"},
+ {"id":"lingbot-relative","label":"LingBot-Map · 킥플립 · 공통 표시 필터","path":"lingbot-relative/","clip":"kickflip","status":"ready"},
+ {"id":"mast3r","label":"MASt3R-SLAM · 킥플립 · 5 FPS","path":"mast3r/","clip":"kickflip","status":"pending"},
+ {"id":"vggt-slam","label":"VGGT-SLAM 2.0 · 킥플립 · 5 FPS","path":"vggt-slam/","clip":"kickflip","status":"pending"},
+ {"id":"kickflip","label":"LingBot-Map · 킥플립 · 기존 절대 필터","path":"kickflip/","clip":"kickflip","status":"ready"},
+ {"id":"ramp","label":"LingBot-Map · 램프 · 기존 결과","path":"","clip":"ramp","status":"ready"}
+]
