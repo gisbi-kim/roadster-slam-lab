@@ -41,7 +41,7 @@
     "medianStep": 0.04784388110852378,
     "emptyFrames": 0
   },
-  "displayFilter": "Per-frame top 40% confidence among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.",
+  "displayFilter": "Confidence >= per-frame 60th percentile (ties retained) among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.",
   "limitations": [
     "Uncalibrated fisheye video, smoke, reflections and fast rotations.",
     "Relative camera pose, not metric robot pose. No ground truth.",

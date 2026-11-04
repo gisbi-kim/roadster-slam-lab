@@ -44,7 +44,7 @@ def main():
     order=sorted(records);arrays=list(zip(*(records[k] for k in order)))
     raw=dict(world_points=np.stack(arrays[0]),rgb=np.stack(arrays[1]).astype('uint8'),confidence=np.stack(arrays[2]),camera_to_world=np.stack(arrays[3]),intrinsics=np.stack(arrays[4]),times=np.array(order)/30)
     work=Path(a.work);work.mkdir(parents=True,exist_ok=True);np.savez_compressed(work/'predictions.npz',**raw)
-    meta=dict(title='Roadster / Kickflip',model='VGGT-SLAM 2.0',modelRepo='https://github.com/MIT-SPARK/VGGT-SLAM',upstreamCommit=subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip(),sourceUrl='https://www.youtube.com/watch?v=3NyyOZQzy_E',sourceSegment=[4.833333333,13.9],duration=9.066666667,sampleFps=5,inferenceSeconds=elapsed,peakGpuGB=peak,settings=dict(inputFrames=len(paths),submapSize=17,overlap=1,maxLoops=1,lcThreshold=.95,graph='SL(4)',opticalFlowSubsampling=False),note='5 FPS 전체 입력; SL(4) 그래프 최적화. RAFT 입력 선별만 비활성화.')
+    meta=dict(title='Roadster / Kickflip',model='VGGT-SLAM 2.0',modelRepo='https://github.com/MIT-SPARK/VGGT-SLAM',upstreamCommit=subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip(),sourceUrl='https://www.youtube.com/watch?v=3NyyOZQzy_E',sourceSegment=[4.833333333,13.9],duration=9.066666667,sampleFps=5,inferenceSeconds=elapsed,peakGpuGB=peak,settings=dict(inputFrames=len(paths),submapSize=17,overlap=1,maxLoops=1,lcThreshold=.95,graph='SL(4)',opticalFlowSubsampling=False,parameterDtype='float32',autocast='bfloat16',submaps=sum(not x.get_lc_status() for x in solver.map.get_submaps()),acceptedLoopClosures=solver.graph.num_loop_closures),note='5 FPS 전체 입력; SL(4) 그래프 최적화. RAFT 입력 선별만 비활성화.')
     export_predictions(raw,a.output,meta)
 
 if __name__=='__main__':main()

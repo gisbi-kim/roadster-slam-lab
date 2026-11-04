@@ -41,7 +41,7 @@ def export_predictions(raw, output, meta):
     steps=np.linalg.norm(np.diff(poses[:,:3,3],axis=0),axis=-1)
     meta.update(frames=n,width=w,height=h,pointCount=len(xyz),bounds=[np.quantile(xyz,.01,axis=0).tolist(),np.quantile(xyz,.99,axis=0).tolist()],
         diagnostics=dict(pathLength=float(steps.sum()),maxStep=float(steps.max()) if len(steps) else 0,medianStep=float(np.median(steps)) if len(steps) else 0,emptyFrames=sum(f['pointCount']==0 for f in frames)),
-        displayFilter='Per-frame top 40% confidence among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.',
+        displayFilter='Confidence >= per-frame 60th percentile (ties retained) among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.',
         limitations=['Uncalibrated fisheye video, smoke, reflections and fast rotations.','Relative camera pose, not metric robot pose. No ground truth.','Point count is a display statistic, not accuracy; sequences have independent coordinates.'])
     (out/'manifest.json').write_text(json.dumps(meta,indent=2),encoding='utf-8')
     print(json.dumps(meta,indent=2),flush=True)

@@ -1,0 +1,57 @@
+{
+  "title": "Roadster / Kickflip",
+  "model": "VGGT-SLAM 2.0",
+  "modelRepo": "https://github.com/MIT-SPARK/VGGT-SLAM",
+  "upstreamCommit": "35327ac28b7d193df9ccc39ba6346052bb6f1207",
+  "sourceUrl": "https://www.youtube.com/watch?v=3NyyOZQzy_E",
+  "sourceSegment": [
+    4.833333333,
+    13.9
+  ],
+  "duration": 9.066666667,
+  "sampleFps": 5,
+  "inferenceSeconds": 9.490825414657593,
+  "peakGpuGB": 13.348839936,
+  "settings": {
+    "inputFrames": 46,
+    "submapSize": 17,
+    "overlap": 1,
+    "maxLoops": 1,
+    "lcThreshold": 0.95,
+    "graph": "SL(4)",
+    "opticalFlowSubsampling": false,
+    "parameterDtype": "float32",
+    "autocast": "bfloat16",
+    "submaps": 3,
+    "acceptedLoopClosures": 0
+  },
+  "note": "5 FPS \uc804\uccb4 \uc785\ub825; SL(4) \uadf8\ub798\ud504 \ucd5c\uc801\ud654. RAFT \uc785\ub825 \uc120\ubcc4\ub9cc \ube44\ud65c\uc131\ud654.",
+  "frames": 46,
+  "width": 518,
+  "height": 420,
+  "pointCount": 469586,
+  "bounds": [
+    [
+      -0.32055854201316836,
+      -0.6690255433320998,
+      0.04190250467509032
+    ],
+    [
+      0.19554869234561925,
+      0.019092727731913336,
+      1.5919489383697547
+    ]
+  ],
+  "diagnostics": {
+    "pathLength": 1.779023486398984,
+    "maxStep": 0.2523059941025711,
+    "medianStep": 0.01907274129782332,
+    "emptyFrames": 0
+  },
+  "displayFilter": "Confidence >= per-frame 60th percentile (ties retained) among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.",
+  "limitations": [
+    "Uncalibrated fisheye video, smoke, reflections and fast rotations.",
+    "Relative camera pose, not metric robot pose. No ground truth.",
+    "Point count is a display statistic, not accuracy; sequences have independent coordinates."
+  ]
+}
