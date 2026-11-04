@@ -10,7 +10,9 @@ npm run dev
 npm run build
 ```
 
-Orbit, zoom, scrub frames, display accumulated/per-frame/all points, follow the predicted camera, and download PLY / camera-to-world matrices. The deployed site serves precomputed results: it does not run GPU inference in Vercel.
+Orbit, zoom, scrub frames, display accumulated/per-frame/all points, follow the predicted camera, and download PLY / camera-to-world matrices. The deployed GitHub Pages site serves precomputed results; GPU inference runs locally.
+
+Site: https://gisbi-kim.github.io/roadster-slam-lab/ . Pushes to `main` build and deploy through `.github/workflows/pages.yml`.
 
 ## Reproduce inference
 
@@ -37,4 +39,4 @@ Outputs: confidence-filtered RGB point cloud (`cloud.ply`), binary viewer arrays
 
 ## Validation
 
-`node scripts/verify-viewer.mjs http://127.0.0.1:5173` exercises real data loading, frame selection, display modes, camera following, playback, desktop/mobile layout, and browser runtime errors. `npm run build` produces the static site.
+`node scripts/verify-viewer.mjs http://127.0.0.1:5173/roadster-slam-lab/` exercises real data loading, frame selection, display modes, camera following, playback, desktop/mobile layout, and browser runtime errors. `npm run build` produces the static site.

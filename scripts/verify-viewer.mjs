@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 const browser=await chromium.launch({headless:true});
 const page=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:1});
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
-const base=process.argv[2]||'http://127.0.0.1:5173';
+const base=process.argv[2]||'http://127.0.0.1:5173/roadster-slam-lab/';
 await page.goto(base,{waitUntil:'networkidle'});
 await page.waitForFunction(()=>window.__reconstruction?.ready,{timeout:60000});
 const stats=await page.evaluate(()=>window.__reconstruction);
