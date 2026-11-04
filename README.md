@@ -44,3 +44,5 @@ Outputs: confidence-filtered RGB point cloud (`cloud.ply`), binary viewer arrays
 ## Validation
 
 `node scripts/verify-viewer.mjs http://127.0.0.1:5173/roadster-slam-lab/` exercises real data loading, frame selection, display modes, camera following, playback, desktop/mobile layout, and browser runtime errors. `npm run build` produces the static site.
+
+Kickflip quality: 32 of 46 frames have zero points after the display filters. The largest predicted translation step is between clip-relative 8.8 and 9.0 seconds, about 15.4× the median step. This is a diagnostic, not a ground-truth error metric. The result is sparse and not a reliable recovered map.
