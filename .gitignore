@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.vercel/
+__pycache__/
+.venv/
+runtime/
+*.pt
+*.npz
+*.log
