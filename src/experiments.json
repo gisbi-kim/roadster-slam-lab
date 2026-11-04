@@ -22,10 +22,17 @@
   },
   {
     "id": "mast3r",
-    "label": "MASt3R-SLAM · 킥플립 · 5 FPS",
+    "label": "MASt3R-SLAM · 킥플립 · 5 FPS · 추적 실패",
     "path": "mast3r/",
     "clip": "kickflip",
-    "status": "pending"
+    "status": "ready"
+  },
+  {
+    "id": "mast3r-15fps",
+    "label": "MASt3R-SLAM · 킥플립 · 15 FPS · 추적 실패",
+    "path": "mast3r-15fps/",
+    "clip": "kickflip",
+    "status": "ready"
   },
   {
     "id": "vggt-slam",

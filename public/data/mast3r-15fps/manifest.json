@@ -1,0 +1,55 @@
+{
+  "title": "Roadster / Kickflip",
+  "model": "MASt3R-SLAM",
+  "modelRepo": "https://github.com/rmurai0610/MASt3R-SLAM",
+  "upstreamCommit": "6717231a2daf55d501a5824bbec43314d4fb77d9",
+  "sourceUrl": "https://www.youtube.com/watch?v=3NyyOZQzy_E",
+  "sourceSegment": [
+    4.833333333,
+    13.9
+  ],
+  "duration": 9.066666667,
+  "sampleFps": 15.0,
+  "inferenceSeconds": 45.07956647872925,
+  "peakGpuGB": 4.946122752,
+  "settings": {
+    "inputFrames": 136,
+    "branch": "windows",
+    "config": "base.yaml",
+    "useCalibration": false,
+    "export": "optimized keyframes only",
+    "finalTrackingMode": "RELOC",
+    "firstKeyframeTime": 0.0,
+    "lastKeyframeTime": 0.0,
+    "trackingLostAt": 0.9333333333333333
+  },
+  "note": "0.93\ucd08\uc5d0\uc11c \ucd94\uc801 \uc2e4\ud328, \uc7ac\uc704\uce58 \ucd94\uc815 \uc2e4\ud328. \ucd08\uae30 1\uac1c \ud0a4\ud504\ub808\uc784\ub9cc \ub0a8\uc74c. \uc804\uccb4 \ud074\ub9bd \ubcf5\uc6d0 \uc2e4\ud328.",
+  "frames": 1,
+  "width": 512,
+  "height": 416,
+  "pointCount": 3444,
+  "bounds": [
+    [
+      -0.639523120522499,
+      -0.09913395918905735,
+      1.9960489165782929
+    ],
+    [
+      0.9279153627157213,
+      0.8491608238220216,
+      3.176408231258393
+    ]
+  ],
+  "diagnostics": {
+    "pathLength": 0.0,
+    "maxStep": 0,
+    "medianStep": 0,
+    "emptyFrames": 0
+  },
+  "displayFilter": "Confidence >= per-frame 60th percentile (ties retained) among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.",
+  "limitations": [
+    "Uncalibrated fisheye video, smoke, reflections and fast rotations.",
+    "Relative camera pose, not metric robot pose. No ground truth.",
+    "Point count is a display statistic, not accuracy; sequences have independent coordinates."
+  ]
+}

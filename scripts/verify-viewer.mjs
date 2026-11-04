@@ -36,6 +36,7 @@ for(const experiment of experiments.filter(e=>e.status==='ready')){
   const expected=manifest.frames;
   assert.equal(await page.evaluate(()=>window.__reconstruction.frameCount),expected);
   assert.equal(await page.evaluate(()=>window.__reconstruction.pointCount),manifest.pointCount);
+  assert.equal(await page.locator('#run-warning').isVisible(),manifest.settings?.finalTrackingMode==='RELOC');
   const url=await page.locator('#download-poses').getAttribute('href');
   const response=await page.request.get(new URL(url,page.url()).href);
   assert(response.ok());assert.equal((await response.json()).frames.length,expected);

@@ -10,12 +10,16 @@ Compare learned reconstruction and SLAM on the same Kickflip clip from [Flight P
 |---|---:|---:|---:|---:|
 | DA3 Large, 5 FPS | 46 | 4.43 s | 8.76 GB | 362,321 |
 | DA3 Large, 15 FPS | 136 | 27.59 s | 15.74 GB | 1,083,641 |
+| MASt3R-SLAM, 15 FPS | 136 (1 keyframe exported) | 45.08 s (tracking + graph) | 4.95 GB | 3,444 |
+| MASt3R-SLAM, 5 FPS | 46 (8 keyframes exported) | 24.24 s (tracking + graph) | 4.46 GB | 29,909 |
 | VGGT-SLAM 2.0, 5 FPS | 46 | 9.49 s (tracking + graph) | 13.35 GB | 469,586 |
 | LingBot-Map, common filter | 46 | 7.16 s | See manifest | 188,587 |
 
-MASt3R-SLAM execution state is recorded in [the experiment catalog](src/experiments.json). Each completed run has a `public/data/<run>/manifest.json` with settings, upstream commit, runtime and output statistics. The old LingBot Kickflip and Ramp exports remain available; their absolute confidence threshold differs from the common filter.
+Execution state is recorded in [the experiment catalog](src/experiments.json). Each completed run has a `public/data/<run>/manifest.json` with settings, upstream commit, runtime and output statistics. The old LingBot Kickflip and Ramp exports remain available; their absolute confidence threshold differs from the common filter.
 
 The 5 FPS runs use byte-identical JPEG inputs; MASt3R reads losslessly converted PNG copies. Each model applies its own required resize/crop. DA3 15 FPS is a separate denser-input experiment. More points do not establish better reconstruction: DA3 still produces layered/overlapping road surfaces. Without a reference trajectory this is not an accuracy benchmark. Maximum/median translation step includes genuine abrupt motion. DA3/LingBot timing is model inference; SLAM timing includes tracking and graph optimization, excluding model loading and export.
+
+MASt3R at 5 FPS lost tracking on input frame 15 (3.0 s), failed to relocalize, and retained only 8 keyframes covering 0–2.8 s. The 15 FPS retry lost tracking at frame 14 (0.93 s) and retained only the initial keyframe. Both partial reconstructions are published as failed full-clip runs, not complete trajectories. VGGT accepted no loop closures in this short clip; its three submaps were optimized using overlapping-frame constraints.
 
 ## Viewer
 
@@ -37,13 +41,14 @@ Checkpoints, original video and raw predictions are excluded from Git. Clone off
 - [MASt3R-SLAM](https://github.com/rmurai0610/MASt3R-SLAM), recursive clone, windows branch / [MASt3R weights](https://huggingface.co/naver/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric), plus upstream retrieval checkpoint and codebook.
 - [VGGT-SLAM](https://github.com/MIT-SPARK/VGGT-SLAM), with VGGT_SPARK and SALAD dependencies / [VGGT weights](https://huggingface.co/facebook/VGGT-1B).
 
-LingBot/DA3 use Python 3.11 on Windows. SLAM adapters use Ubuntu 24.04 in WSL, Python 3.12. PyTorch 2.8.0 + CUDA 12.8, torchvision 0.23.0. `scripts/setup_slam_wsl.sh` records the local extension build setup; adjust its local paths before reuse. CUDA builds target SM89. The curope dispatch uses `scalar_type()` instead of the removed `type()` API. The trusted upstream retrieval checkpoint loader uses `weights_only=False` for its Python metadata under PyTorch 2.8.
+LingBot/DA3 use Python 3.11 on Windows. SLAM adapters use Ubuntu 24.04 in WSL, Python 3.12. PyTorch 2.8.0 + CUDA 12.8, torchvision 0.23.0. `scripts/setup_slam_wsl.sh` records the local extension build setup; adjust its local paths before reuse. CUDA builds target SM89. The curope and matching dispatches use `scalar_type()` instead of the removed `type()` API, and the WSL branch norm call uses `at::linalg_norm`. These are PyTorch API compatibility changes. The trusted upstream retrieval checkpoint loader uses `weights_only=False` for its Python metadata under PyTorch 2.8.
 
 ```sh
 python scripts/reconstruct.py --source kickflip.mp4 --upstream /path/to/lingbot-map --checkpoint /path/to/lingbot-map.pt --title 'Roadster / Kickflip' --source-start 4.833333333 --output public/data/kickflip --work runtime/kickflip --fps 5
 python scripts/run_da3.py --source kickflip.mp4 --checkpoint /path/to/da3-large --upstream /path/to/da3 --fps 5 --output public/data/da3-5fps --work runtime/da3-5fps
 # Repeat DA3 with --fps 15 and separate output/work directories.
 python scripts/run_mast3r.py --upstream /path/to/mast3r-slam --checkpoint /path/to/mast3r-hf --images /path/to/kickflip-png --output /path/to/public/data/mast3r --work /path/to/runtime/mast3r
+# MASt3R 15 FPS: use --fps 15, the 136-frame PNG directory, and separate output/work paths.
 python scripts/run_vggt_slam.py --upstream /path/to/vggt-slam --checkpoint /path/to/vggt-model.pt --images /path/to/runtime/da3-5fps --output /path/to/public/data/vggt-slam --work /path/to/runtime/vggt-slam
 ```
 

@@ -21,6 +21,8 @@ import re
 p=Path('setup.py');s=p.read_text();s=re.sub(r'        "-gencode=arch=compute_\d+,code=sm_\d+",\n','',s);s=s.replace('extra_compile_args["nvcc"] = [','extra_compile_args["nvcc"] = [\n        "-gencode=arch=compute_89,code=sm_89",');p.write_text(s)
 p=Path('thirdparty/mast3r/mast3r/retrieval/processor.py');s=p.read_text().replace("torch.load(modelname, 'cpu')","torch.load(modelname, 'cpu', weights_only=False)");p.write_text(s)
 p=Path('thirdparty/mast3r/dust3r/croco/models/curope/kernels.cu');s=p.read_text().replace('tokens.type()', 'tokens.scalar_type()');p.write_text(s)
+p=Path('mast3r_slam/backend/src/matching_kernels.cu');s=p.read_text().replace('D11.type()', 'D11.scalar_type()');p.write_text(s)
+p=Path('mast3r_slam/backend/src/gn_kernels.cu');s=p.read_text().replace('torch::linalg::linalg_norm', 'at::linalg_norm');p.write_text(s)
 PY
 python -m pip install --no-build-isolation --no-deps -e thirdparty/mast3r
 python -m pip install --no-build-isolation --no-deps thirdparty/mast3r/asmk

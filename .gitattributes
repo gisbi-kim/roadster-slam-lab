@@ -1,4 +1,1 @@
-* text=auto
-*.bin binary
-*.ply binary
-*.jpg binary
+*.sh text eol=lf
