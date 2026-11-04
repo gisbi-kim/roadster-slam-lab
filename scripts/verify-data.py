@@ -1,8 +1,8 @@
 """Check export integrity and transform conventions (not ground-truth accuracy)."""
-import json
+import json, sys
 from pathlib import Path
 import numpy as np
-p=Path('public/data')
+p=Path(sys.argv[1] if len(sys.argv)>1 else 'public/data')
 m=json.loads((p/'manifest.json').read_text())
 t=json.loads((p/'trajectory.json').read_text())
 xyz=np.fromfile(p/'positions.bin',dtype='<f4').reshape(-1,3)

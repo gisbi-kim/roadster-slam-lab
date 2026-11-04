@@ -1,0 +1,51 @@
+{
+  "title": "Roadster / Kickflip",
+  "model": "LingBot-Map",
+  "modelRepo": "https://github.com/Robbyant/lingbot-map",
+  "upstreamCommit": "b9dd1b1de535e6d36e777fb42b8433c781bfd783",
+  "sourceUrl": "https://www.youtube.com/watch?v=3NyyOZQzy_E",
+  "sourceSegment": [
+    4.833333333,
+    13.899999999666665
+  ],
+  "sourceSha256": "20869a67b60b4cd1ce17b8ad2b5a910eb14004184b51ef51bc5025d555baa5f8",
+  "duration": 9.066666666666666,
+  "frames": 46,
+  "width": 518,
+  "height": 420,
+  "pointCount": 55322,
+  "sampleFps": 5.0,
+  "inferenceSeconds": 7.157684564590454,
+  "peakGpuGB": 10.027201024,
+  "settings": {
+    "imageSize": 518,
+    "scaleFrames": 2,
+    "keyframeInterval": 2,
+    "cacheWindow": 16,
+    "backend": "SDPA",
+    "dtype": "bfloat16"
+  },
+  "bounds": [
+    [
+      -0.13214869797229767,
+      -0.38003504276275635,
+      1.1542781591415405
+    ],
+    [
+      0.03309931233525276,
+      -0.2383900284767151,
+      1.5242161750793457
+    ]
+  ],
+  "diagnostics": {
+    "pathLength": 4.76801872253418,
+    "maxStep": 0.9082165360450745,
+    "medianStep": 0.05893549695611
+  },
+  "limitations": [
+    "Experimental monocular reconstruction; no ground-truth accuracy evaluation.",
+    "Uncalibrated fisheye projection, smoke, reflections and camera-fixed bodywork can corrupt geometry.",
+    "Camera pose, not calibrated robot body pose. Scale is arbitrary, not meters.",
+    "Point cloud display uses confidence, dark-pixel and peripheral masks; no geometric bundle adjustment."
+  ]
+}

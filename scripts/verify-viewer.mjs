@@ -5,7 +5,7 @@ const page=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleF
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
 const base=process.argv[2]||'http://127.0.0.1:5173/roadster-slam-lab/';
 await page.goto(base,{waitUntil:'networkidle'});
-await page.waitForFunction(()=>window.__reconstruction?.ready,{timeout:60000});
+await page.waitForFunction(()=>window.__reconstruction?.ready,null,{timeout:60000});
 const stats=await page.evaluate(()=>window.__reconstruction);
 assert(stats.pointCount>1000);assert(stats.frameCount>10);
 await page.locator('#scrub').fill('30');
@@ -27,6 +27,15 @@ await page.setViewportSize({width:390,height:844});
 await page.waitForTimeout(300);
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
 await page.screenshot({path:'runtime/viewer-mobile.png',fullPage:true});
+for(const clip of ['ramp','kickflip']){
+  await page.locator('#clip').selectOption(clip);
+  await page.waitForFunction(c=>window.__reconstruction?.ready&&window.__reconstruction.clip===c,clip,{timeout:60000});
+  const expected=clip==='kickflip'?46:62;
+  assert.equal(await page.evaluate(()=>window.__reconstruction.frameCount),expected);
+  const url=await page.locator('#download-poses').getAttribute('href');
+  const response=await page.request.get(new URL(url,page.url()).href);
+  assert(response.ok());assert.equal((await response.json()).frames.length,expected);
+}
 assert.deepEqual(errors,[]);
 console.log(JSON.stringify({base,...stats,errors,interactionChecks:'passed',mobileOverflow:false}));
 await browser.close();

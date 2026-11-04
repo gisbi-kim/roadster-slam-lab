@@ -2,6 +2,10 @@
 
 A one-clip reconstruction experiment: official **LingBot-Map** depth and camera poses, displayed in an interactive Three.js viewer. The first sequence is the 12.33-second ramp segment of [Flight POV | Roadster](https://www.youtube.com/watch?v=3NyyOZQzy_E), cropped to the large left view.
 
+The viewer now defaults to **Kickflip** (original 4.833–13.900 seconds): 46 frames at 5 FPS, 55,322 filtered points, 7.16 seconds of GPU inference. Select **Ramp** to compare with the original 62-frame run. Each sequence has an independent coordinate system and arbitrary scale; they are not aligned or merged. Kickflip data lives in `public/data/kickflip/`, with full raw predictions retained locally in `runtime/kickflip/predictions.npz`.
+
+To reproduce Kickflip, add `--title "Roadster / Kickflip" --source-start 4.833333333 --output public/data/kickflip --work runtime/kickflip` to the inference command and supply `02_킥플립.mp4` as the source.
+
 ## Viewer
 
 ```sh

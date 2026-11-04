@@ -13,6 +13,8 @@ p.add_argument('--output', default='public/data')
 p.add_argument('--work', default='runtime')
 p.add_argument('--fps', type=int, default=5)
 p.add_argument('--image-size', type=int, default=518)
+p.add_argument('--title', default='Roadster / Ramp')
+p.add_argument('--source-start', type=float, default=13.9)
 a = p.parse_args()
 sys.path.insert(0, a.upstream)
 from lingbot_map.models.gct_stream import GCTStream
@@ -104,9 +106,9 @@ trajectory = dict(convention='camera-to-world, OpenCV camera axes (+x right,+y d
 (out/'trajectory.json').write_text(json.dumps(trajectory),encoding='utf-8')
 centers=poses[:,:3,3]
 steps=np.linalg.norm(np.diff(centers,axis=0),axis=1)
-meta=dict(title='Roadster / Ramp',model='LingBot-Map',modelRepo='https://github.com/Robbyant/lingbot-map',
+meta=dict(title=a.title,model='LingBot-Map',modelRepo='https://github.com/Robbyant/lingbot-map',
     upstreamCommit=subprocess.check_output(['git','-C',a.upstream,'rev-parse','HEAD'],text=True).strip(),
-    sourceUrl='https://www.youtube.com/watch?v=3NyyOZQzy_E',sourceSegment=[13.9,26.233333333],
+    sourceUrl='https://www.youtube.com/watch?v=3NyyOZQzy_E',sourceSegment=[a.source_start,a.source_start+frame_count/fps],
     sourceSha256=hashlib.sha256(Path(a.source).read_bytes()).hexdigest(),
     duration=frame_count/fps,frames=n,width=w,height=h,pointCount=len(points),
     sampleFps=fps/stride,inferenceSeconds=elapsed,peakGpuGB=torch.cuda.max_memory_allocated()/1e9,
