@@ -1,0 +1,63 @@
+{
+  "title": "Roadster / Ramp",
+  "model": "Depth Anything 3 Large",
+  "modelRepo": "https://github.com/ByteDance-Seed/Depth-Anything-3",
+  "upstreamCommit": "3d835ec1a5802d64a8b8b15f817a1ab54809bfe4",
+  "sourceUrl": "https://www.youtube.com/watch?v=3NyyOZQzy_E",
+  "sourceSegment": [
+    13.9,
+    26.233333333
+  ],
+  "sourceSha256": "8af93f90009914265febc4829ca440e80b5d6e6ce142f436b78b10873404df6b",
+  "duration": 12.333333333333334,
+  "sampleFps": 5.0,
+  "inferenceSeconds": 4.7630774974823,
+  "peakGpuGB": 9.231768576,
+  "settings": {
+    "checkpoint": "depth-anything/DA3-LARGE",
+    "resolution": 504,
+    "useRayPose": false,
+    "preprocessing": {
+      "variant": "perspective",
+      "calibrated": false,
+      "sourceModel": "assumed equidistant",
+      "sourceHorizontalFovDegrees": 180,
+      "targetHorizontalFovDegrees": 90,
+      "principalPoint": "image center",
+      "output": [
+        1280,
+        960
+      ],
+      "distortionCoefficients": "not estimated"
+    }
+  },
+  "note": "\uc785\ub825 \ub2e8\uacc4\uc5d0\uc11c \uac00\uc815\ud55c \uc5b4\uc548\u219290\u00b0 \uc6d0\uadfc \ud22c\uc601. \ub80c\uc988 \uce98\ub9ac\ube0c\ub808\uc774\uc158 \uc5c6\uc774 180\u00b0 equidistant \ubaa8\ub378\uc744 \uac00\uc815\ud55c \uc2e4\ud5d8.",
+  "frames": 62,
+  "width": 504,
+  "height": 378,
+  "pointCount": 426967,
+  "bounds": [
+    [
+      -0.4025430977344513,
+      -0.38976868987083435,
+      -0.23297347128391266
+    ],
+    [
+      0.7036541700363159,
+      0.14127615094184875,
+      1.3627088069915771
+    ]
+  ],
+  "diagnostics": {
+    "pathLength": 12.04401006533592,
+    "maxStep": 0.8478727126349166,
+    "medianStep": 0.15125289145642182,
+    "emptyFrames": 0
+  },
+  "displayFilter": "Confidence >= per-frame 60th percentile (ties retained) among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.",
+  "limitations": [
+    "Uncalibrated fisheye video, smoke, reflections and fast rotations.",
+    "Relative camera pose, not metric robot pose. No ground truth.",
+    "Point count is a display statistic, not accuracy; sequences have independent coordinates."
+  ]
+}

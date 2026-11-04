@@ -9,6 +9,7 @@ const base=process.argv[2]||'http://127.0.0.1:5173/roadster-slam-lab/';
 await page.goto(base,{waitUntil:'networkidle'});
 await page.waitForFunction(()=>window.__reconstruction?.ready,null,{timeout:60000});
 const stats=await page.evaluate(()=>window.__reconstruction);
+await page.waitForFunction(()=>{const im=document.querySelector('.input-comparison img');return im?.complete&&im.naturalWidth>0});
 assert(stats.pointCount>1000);assert(stats.frameCount>10);
 await page.locator('#scrub').fill('30');
 await page.locator('#scrub').dispatchEvent('input');

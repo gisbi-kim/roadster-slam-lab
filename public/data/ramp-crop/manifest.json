@@ -1,0 +1,64 @@
+{
+  "title": "Roadster / Ramp",
+  "model": "Depth Anything 3 Large",
+  "modelRepo": "https://github.com/ByteDance-Seed/Depth-Anything-3",
+  "upstreamCommit": "3d835ec1a5802d64a8b8b15f817a1ab54809bfe4",
+  "sourceUrl": "https://www.youtube.com/watch?v=3NyyOZQzy_E",
+  "sourceSegment": [
+    13.9,
+    26.233333333
+  ],
+  "sourceSha256": "8af93f90009914265febc4829ca440e80b5d6e6ce142f436b78b10873404df6b",
+  "duration": 12.333333333333334,
+  "sampleFps": 5.0,
+  "inferenceSeconds": 4.802256107330322,
+  "peakGpuGB": 9.231768576,
+  "settings": {
+    "checkpoint": "depth-anything/DA3-LARGE",
+    "resolution": 504,
+    "useRayPose": false,
+    "preprocessing": {
+      "variant": "crop",
+      "calibrated": false,
+      "center": [
+        0.5,
+        0.5
+      ],
+      "cropWidthFraction": 0.56,
+      "cropAspectRatio": 1.3333333333333333,
+      "output": [
+        1280,
+        960
+      ]
+    }
+  },
+  "note": "\uc785\ub825 \ub2e8\uacc4\uc5d0\uc11c \uc911\uc559 56% \ud3ed, 4:3 \ud06c\ub86d. \ub9c1 \uc81c\uac70 \ubaa9\uc801\uc774\uba70 \ub80c\uc988 \uc65c\uace1 \ubcf4\uc815\uc740 \uc544\ub2d8.",
+  "frames": 62,
+  "width": 504,
+  "height": 378,
+  "pointCount": 475781,
+  "bounds": [
+    [
+      -0.5429989099502563,
+      -0.9262436628341675,
+      0.3880147337913513
+    ],
+    [
+      0.40123796463012695,
+      0.09117160737514496,
+      1.3856570720672607
+    ]
+  ],
+  "diagnostics": {
+    "pathLength": 4.795931136277078,
+    "maxStep": 0.1787539919348226,
+    "medianStep": 0.07815515028938771,
+    "emptyFrames": 0
+  },
+  "displayFilter": "Confidence >= per-frame 60th percentile (ties retained) among elliptical interior and RGB max>30; 3px stride; exclude furthest 2%. No absolute confidence cutoff.",
+  "limitations": [
+    "Uncalibrated fisheye video, smoke, reflections and fast rotations.",
+    "Relative camera pose, not metric robot pose. No ground truth.",
+    "Point count is a display statistic, not accuracy; sequences have independent coordinates."
+  ]
+}

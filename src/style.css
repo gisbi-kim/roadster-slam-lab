@@ -6,3 +6,5 @@
 .sequence-picker select{width:min(420px,75vw)}.comparison{margin-top:30px}.comparison h2{font-size:21px;font-weight:500}.comparison p:not(.eyebrow){font-size:12px;color:#91a59b;line-height:1.8}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{text-align:left;padding:13px 12px;border-bottom:1px solid #34413f;white-space:nowrap}th{color:#91a59b;font-weight:400}td a{color:#c8e9d6}.comparison td:first-child{min-width:240px}
 
 .run-warning{border-left:3px solid #ffbc76;padding:12px 16px;background:#211e19;color:#ffcc99;font-size:13px;line-height:1.7;margin:0 0 18px}
+
+.input-comparison{margin:32px 0}.input-comparison img{display:block;width:100%;height:auto;border:1px solid #314342}.input-comparison p{font-size:13px;line-height:1.8;color:#9fb5af}

@@ -70,3 +70,26 @@ VGGT-SLAM uses 17-frame submaps with one shared frame, place retrieval and SL(4)
 ## Validation
 
 `scripts/verify-data.py public/data/<run>` checks binary counts, finite coordinates, SE(3) matrices, timestamps and frame references. Browser verification checks every ready experiment, downloads, controls, and desktop/mobile rendering. No ground-truth accuracy is claimed.
+
+
+## Ramp: remove the peripheral ring before inference
+
+The default view now shows `ramp-crop`. Three new DA3 runs use the same 62 Ramp frames at 5 FPS: full input (`ramp-full`), centered 56%-width 4:3 crop (`ramp-crop`), and an assumed equidistant-to-rectilinear remap (`ramp-perspective`). Cropping/remapping occurs **before model inference**, unlike the existing display-only point mask. The crop and remap produce 1280×960 input files; DA3 resizes them to 504×378. Full input uses 504×420. The original video remains unchanged.
+
+The remap assumes a centered 180-degree horizontal equidistant camera and a 90-degree horizontal rectilinear output, using r=f*theta. It has no calibrated lens parameters and is not a recovered camera calibration. See [OpenCV fisheye equations](https://docs.opencv.org/4.13.0/db/d58/group__calib3d__fisheye.html). Every pixel is resampled from the original image; no generative image editing is used.
+
+| Ramp DA3 input | Displayed points | Inference | Maximum / median pose translation step |
+|---|---:|---:|---:|
+| Full | 348,561 | 6.51 s | 10.3× |
+| Center crop | 475,781 | 4.80 s | 2.3× |
+| Assumed perspective remap | 426,967 | 4.76 s | 5.6× |
+
+The lower step ratio is a continuity diagnostic, not an accuracy score. Scale changes substantially between these independent reconstructions. Cropping removes the ring in the inspected frames, but overlapping surfaces and the nearly opaque final smoke frames remain problematic. Input previews at 0, 7, and 12.2 seconds are included on the site.
+
+Reproduce from the repository root:
+
+```sh
+python scripts/test_central_view.py --source /path/to/03_ramp.mp4 --runtime /path/to/roadster-slam-runtime
+```
+
+The runtime directory must contain installed `da3` and the official local `da3-large` checkpoint. Use `--preview-only` to inspect preprocessing without inference.

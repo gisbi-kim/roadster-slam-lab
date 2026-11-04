@@ -1,5 +1,26 @@
 [
   {
+    "id": "ramp-crop",
+    "label": "DA3 · 램프 · 중앙 크롭",
+    "path": "ramp-crop/",
+    "clip": "ramp",
+    "status": "ready"
+  },
+  {
+    "id": "ramp-perspective",
+    "label": "DA3 · 램프 · 가정 기반 원근 변환",
+    "path": "ramp-perspective/",
+    "clip": "ramp",
+    "status": "ready"
+  },
+  {
+    "id": "ramp-full",
+    "label": "DA3 · 램프 · 원본 입력 대조군",
+    "path": "ramp-full/",
+    "clip": "ramp",
+    "status": "ready"
+  },
+  {
     "id": "da3-5fps",
     "label": "DA3 Large · 킥플립 · 5 FPS",
     "path": "da3-5fps/",
